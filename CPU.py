@@ -37,10 +37,9 @@ def dibujar_matrix():
                     pygame.draw.rect(window, BLACK, (j * 75, i * 75, 75, 75), 0)
 
 def check_position():
-    global positionX
-    global positionY
-    if positionX < 0 or positionX > 10 or positionY < 0 or positionY > 10:
+    if positionX < 0 or positionX > 9 or positionY < 0 or positionY > 9:
         print("El bot se ha salido de los límites del tablero.")
+        exit(1)  # Salir del programa si el bot se sale del tablero
         return 
 
 def bot_movement(num):
@@ -55,7 +54,6 @@ def bot_movement(num):
         positionY -= num
     else: 
         positionX -= num
-    
 
 def rotate_bot(num):
     global degrees
@@ -67,6 +65,7 @@ def  bot_logic():
     for i in range(len(instructions)):
         if instructions[i][0] == "MOV":
             bot_movement(int(instructions[i][1]))
+            check_position()
             draw()
         else:
             rotate_bot(int(instructions[i][1]))
