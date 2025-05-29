@@ -39,7 +39,9 @@ def dibujar_matrix():
 def check_position():
     global positionX
     global positionY
-    return 0
+    if positionX < 0 or positionX > 10 or positionY < 0 or positionY > 10:
+        print("El bot se ha salido de los límites del tablero.")
+        return 
 
 def bot_movement(num):
     global positionY
