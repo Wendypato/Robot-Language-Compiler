@@ -7,6 +7,4 @@ TURN,90
 MOV,4
 TURN,90
 MOV,4
-TURN,90
 MOV,4
-turn,90

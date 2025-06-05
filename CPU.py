@@ -11,16 +11,14 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 # Variables del Bot
-positionXF = 0
-positionYF = 0
-positionXA = 0
-positionYA = 0
+positionX = 0
+positionY = 0
 degrees = 0
 direccion = "DOWN"  # Direccion inicial del bot
 
 # Variables del archivo
 # Se abre el archivo y se lee su contenido
-archivo = open("test.txt", "r")
+archivo = open("instructions.txt", "r")
 instructions = archivo.read()
 archivo.close()
 # Se separa las instrucciones en lineas y luego en comas
@@ -39,44 +37,33 @@ def dibujar_matrix():
                 if j%2 == 1:
                     pygame.draw.rect(window, BLACK, (j * 75, i * 75, 75, 75), 0)
 
-def check_position():
-    if positionXF < 0 or positionXF > 9 or positionYF < 0 or positionYF > 9:
+def check_position(num):
+    if positionX+num < 0 or positionX+num > 9 or positionY+num < 0 or positionY+num > 9:
         print("El bot se ha salido de la matriz.")
         exit(1)  # Salir del programa si el bot se sale del tablero
         return 
 
 
 def bot_movement(num):
-    global positionYF
-    global positionXF
-    global positionYA
-    global positionXA
+    global positionY
+    global positionX
     global degrees
-    if degrees == 0:  
-        positionYF += num
+    if degrees == 0 or degrees == 90:
         step = 0.25
-    elif degrees == 90: 
-        positionXF += num
-        step = 0.25
-    elif degrees == 180: 
-        positionYF -= num
-        step = -0.25
-    else: 
-        positionXF -= num
+    else:
         step = -0.25
     # Verificar si el movimiento es válido
-    check_position()
-    sprite_step = 1
+    check_position(num)
     # Animar el movimiento del bot
     if direccion == "DOWN" or direccion == "UP":
         for i in range(num*4):
             round = i//4
-            positionYA += step
+            positionY += step
             draw(i-4*round)
     else:
         for i in range(num*4):
             round = i//4
-            positionXA += step
+            positionX += step
             draw(i-4*round)
     
         
@@ -101,7 +88,6 @@ def  bot_logic():
     for i in range(len(instructions)):
         if instructions[i][0] == "MOV":
             bot_movement(int(instructions[i][1]))
-            check_position()
             draw(0)
         else:
             rotate_bot(int(instructions[i][1]))
@@ -115,7 +101,7 @@ def draw_bot(num):
         CPU = pygame.image.load(f"sprites/penguin-gray[{direccion}][{0}].png")
     CPU = pygame.transform.scale(CPU, (75, 75))  # Escalar la imagen del bot
     CPU.convert_alpha()  # Convertir la imagen para mejorar el rendimiento
-    window.blit(CPU, (positionXA * 75, positionYA * 75))
+    window.blit(CPU, (positionX * 75, positionY * 75))
 
 def draw(num):
     dibujar_matrix()
