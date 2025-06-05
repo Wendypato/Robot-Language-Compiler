@@ -24,3 +24,9 @@ Sus salidas serían:
 - mov,2
 - mov,4
 - mov,1
+
+Instrucciones a seguir en linuxzoo para que sirva una vez ya creados el Lex y el YACC:
+- lex_robot.l
+- yacc -d lex_robot.y
+- gcc lex.yy.c y.tab.c -o lex_robot
+- ./lex_robot comandos.txt
