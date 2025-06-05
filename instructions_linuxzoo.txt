@@ -1,0 +1,4 @@
+lex lex_robot.l
+yacc -d lex_robot.y
+gcc lex.yy.c y.tab.c -o lex_robot
+./lex_robot comandos.txt
