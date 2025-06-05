@@ -1,0 +1,21 @@
+digraph NFA{
+    ReciveInstructions [shape=circle];
+    Turn [shape=circle];
+    Move [shape=circle];
+    Degrees [shape=circle];
+    Blocks [shape=circle];
+    ValidatePosition [shape=circle];
+    EndFile [penwidth ="2", shape=doublecircle];
+
+    ReciveInstructions -> Turn [label="TURN"];
+    ReciveInstructions -> Move [label="MOV"];
+    Turn -> Degrees [label="DEGREES"];
+    Move -> Blocks [label="BLOCKS"];
+    Degrees -> Move [label="MOV"];
+    Degrees -> Turn [label="TURN"];
+    Degrees -> EndFile [label="EMPTY"];
+    Blocks -> ValidatePosition[label="ENDL"];
+    ValidatePosition -> Turn [label="TURN"];
+    ValidatePosition -> Move [label="MOV"];
+    ValidatePosition -> EndFile [label="EMPTY"];
+}
