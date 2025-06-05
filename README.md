@@ -5,3 +5,22 @@ El objetivo de este proyecto es simular el CPU de un robot, el cual debe soporta
 El archivo yacc espera un archivo de texto con múltiples instrucciones, las instrucciones deben de tener la palabra “Robot” con R mayúscula, y las demás letras en minúscula.
 
 La instrucciones se encunetran en el archivo llamado comandos.txt
+
+Un ejemplo de comandos validos son:
+Robot please move 2 blocks ahead
+Robot please turn 90 degrees
+Robot please move 3 blocks ahead and then turn 90 degrees
+Robot please move 3 blocks ahead and then turn 90 degrees and then move 2 block
+Robot pretty please move 4 block
+Robot move 1 block pretty please
+
+Sus salidas serían:
+mov,2
+turn,90
+mov,3
+turn,90
+mov,3
+turn,90
+mov,2
+mov,4
+mov,1
