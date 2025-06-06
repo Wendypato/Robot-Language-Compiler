@@ -86,7 +86,7 @@ def rotate_bot(num):
 
 def  bot_logic():
     for i in range(len(instructions)):
-        if instructions[i][0] == "MOV":
+        if instructions[i][0] == "mov":
             bot_movement(int(instructions[i][1]))
             draw(0)
         else:
